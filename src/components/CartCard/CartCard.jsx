@@ -5,7 +5,7 @@ const CartCard = ({ productData }) => {
   return (
     <div className="grid grid-cols-4  items-center border-b-2 w-full px-2 py-4 font-bold">
       <div className="">
-        <img width={100} src="https://dummyimage.com/600x400/000/fff" alt="" />
+        <img width={100} src={productData.images[0]} alt="" />
 
         {/* image */}
       </div>

@@ -1,20 +1,23 @@
 import CartCard from "@/components/CartCard/CartCard";
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { CartContext } from "@/context/CartContext";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 
-const Cart = ({ productData }) => {
-  function handleClick(){
-    toast.success('button clicked!')
+const Cart = () => {
+  const { cart } = useContext(CartContext);
+
+  function handleClick() {
+    toast.success("button clicked!");
   }
-  console.log(productData, "from cart.jsx");
   return (
     <div className="bg-[#fee] flex  mt-[60px] text-center min-h-screen">
       <div className="flex flex-col items-center  w-3/5  border-2 rounded-md bordergray-300">
-        <CartCard productData={productData[0]} />
-        <CartCard productData={productData[1]} />
-        <CartCard productData={productData[2]} />
-        <CartCard productData={productData[3]} />
+        {cart && cart.length !== 0 ? (
+          cart.map((item) => <CartCard productData={item} />)
+        ) : (
+          <h1>Your cart is empty Purchase some products <a href="/"> click here</a></h1>
+        )}
       </div>
       <div className="flex flex-col    border-2 w-2/5 p-6">
         {/* checkout section  */}
@@ -36,7 +39,9 @@ const Cart = ({ productData }) => {
 
             <input type="text" />
           </div>
-        <Button onClick={handleClick} className='w-[60%] mt-12'>Proceed to payement</Button>
+          <Button onClick={handleClick} className="w-[60%] mt-12">
+            Proceed to payement
+          </Button>
         </div>
       </div>
     </div>
